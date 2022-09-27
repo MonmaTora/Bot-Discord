@@ -1,7 +1,7 @@
 // Run dotenv
 require('dotenv').config();
 
-const {Client, GatewayIntentBits } = require('discord.js');
+const {Client, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -11,6 +11,7 @@ const client = new Client({
 });
 
 client.on('ready', () => {
+    client.application.commands.create(data);
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -29,4 +30,29 @@ client.on("messageCreate", message => {
     }
 })
 
+// Command Clear
+var data = new SlashCommandBuilder()
+    .setName("clear")
+    .setDescription("commande pour supprimer des messages")
+    .addIntegerOption(option =>
+        option.setName("number")
+            .setDescription("Nombre de messages que vous voulez suprimer")
+            .setRequired(true)
+        );
+
+client.on("interactionCreate", interaction => {
+    if(interaction.isCommand()){
+        if(interaction.commandName === "clear"){
+            var number = interaction.options.getInteger("number");
+
+            if(number >= 1 && number <= 100){
+                interaction.channel.bulkDelete(number);
+                interaction.reply({content: number + " messages correctement supprimés", ephemeral: true})
+            }
+            else {
+                interaction.reply({content: "Le nombre de messages supprimés doit être situé entre 1 et 100.", ephemeral: true})
+            }
+        }
+    }
+})
 client.login(process.env.DISCORD_TOKEN);
