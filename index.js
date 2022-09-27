@@ -15,18 +15,46 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on("messageCreate", message => {
-    if(message.author.bot) return;
-    console.log(message.content);
-    if(message.content === "ping"){
-        message.reply("pong");
-        message.channel.send("pong");
+// Command list-command
+var data = new SlashCommandBuilder()
+    .setName("list-command")
+    .setDescription("Liste des commandes du bot")
+
+client.on("interactionCreate", interaction => {
+    if(interaction.isCommand()){
+        if(interaction.commandName === "list-command"){
+            message.reply("Les commandes du bot sont \n ..."
+            + "/ping            | Réponds 'pong' \n"
+            + "/list-command    | Liste des commandes du bot \n"
+            + "/clear           | Efface jusqu'a 100 messages \n" 
+            + "/mention         | mention");
+        }
     }
-    else if(message.content === "help"){
-        message.reply("les commandes du bot sont \n ...");
+})
+
+// Command ping-pong
+var data = new SlashCommandBuilder()
+    .setName("mention")
+    .setDescription("...")
+
+client.on("interactionCreate", interaction => {
+    if(interaction.isCommand()){
+        if(interaction.commandName === "mention"){
+            message.reply("Mention d'un utilisateur : <@" + message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">");
+        }
     }
-    else if(message.content === "mention"){
-        message.reply("Mention d'un utilisateur : <@" + message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">");
+})
+
+// Command ping-pong
+var data = new SlashCommandBuilder()
+    .setName("ping")
+    .setDescription("pong")
+
+client.on("interactionCreate", interaction => {
+    if(interaction.isCommand()){
+        if(interaction.commandName === "ping"){
+            message.channel.send("pong");
+        }
     }
 })
 
@@ -55,4 +83,5 @@ client.on("interactionCreate", interaction => {
         }
     }
 })
+
 client.login(process.env.DISCORD_TOKEN);
