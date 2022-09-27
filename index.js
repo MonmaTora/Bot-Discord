@@ -11,12 +11,15 @@ const client = new Client({
 });
 
 client.on('ready', () => {
-    client.application.commands.create(data, data2, data3, data4);
+    client.application.commands.create(data);
+    client.application.commands.create(cmd_list);
+    client.application.commands.create(cmd_mention);
+    client.application.commands.create(cmd_ping);
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
 // Command list-command
-var data = new SlashCommandBuilder()
+var cmd_list = new SlashCommandBuilder()
     .setName("list-command")
     .setDescription("Liste des commandes du bot")
 
@@ -32,8 +35,8 @@ client.on("interactionCreate", interaction => {
     }
 })
 
-// Command ping-pong
-var data2 = new SlashCommandBuilder()
+// Command mention
+var cmd_mention = new SlashCommandBuilder()
     .setName("mention")
     .setDescription("...")
 
@@ -46,7 +49,7 @@ client.on("interactionCreate", interaction => {
 })
 
 // Command ping-pong
-var data3 = new SlashCommandBuilder()
+var cmd_ping = new SlashCommandBuilder()
     .setName("ping")
     .setDescription("pong")
 
@@ -59,7 +62,7 @@ client.on("interactionCreate", interaction => {
 })
 
 // Command Clear
-var data4 = new SlashCommandBuilder()
+var data = new SlashCommandBuilder()
     .setName("clear")
     .setDescription("commande pour supprimer des messages")
     .addIntegerOption(option =>
