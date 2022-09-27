@@ -11,7 +11,7 @@ const client = new Client({
 });
 
 client.on('ready', () => {
-    client.application.commands.create(data);
+    client.application.commands.create(data, data2, data3, data4);
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -33,7 +33,7 @@ client.on("interactionCreate", interaction => {
 })
 
 // Command ping-pong
-var data = new SlashCommandBuilder()
+var data2 = new SlashCommandBuilder()
     .setName("mention")
     .setDescription("...")
 
@@ -46,7 +46,7 @@ client.on("interactionCreate", interaction => {
 })
 
 // Command ping-pong
-var data = new SlashCommandBuilder()
+var data3 = new SlashCommandBuilder()
     .setName("ping")
     .setDescription("pong")
 
@@ -59,7 +59,7 @@ client.on("interactionCreate", interaction => {
 })
 
 // Command Clear
-var data = new SlashCommandBuilder()
+var data4 = new SlashCommandBuilder()
     .setName("clear")
     .setDescription("commande pour supprimer des messages")
     .addIntegerOption(option =>
