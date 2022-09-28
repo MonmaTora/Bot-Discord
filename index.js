@@ -9,57 +9,32 @@ const client = new Client({
         GatewayIntentBits.MessageContent
     ]
 });
+const prefix = "!";
 
 client.on('ready', () => {
     client.application.commands.create(data);
-    // client.application.commands.create(cmd_list);
-    // client.application.commands.create(cmd_mention);
-    // client.application.commands.create(cmd_ping);
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-// // Command list-command
-// var cmd_list = new SlashCommandBuilder()
-//     .setName("list-command")
-//     .setDescription("Liste des commandes du bot")
-
-// client.on("interactionCreate", interaction => {
-//     if(interaction.isCommand()){
-//         if(interaction.commandName === "list-command"){
-//             message.reply("Les commandes du bot sont \n ..."
-//             + "/ping            | Réponds 'pong' \n"
-//             + "/list-command    | Liste des commandes du bot \n"
-//             + "/clear           | Efface jusqu'a 100 messages \n" 
-//             + "/mention         | mention");
-//         }
-//     }
-// })
-
-// // Command mention
-// var cmd_mention = new SlashCommandBuilder()
-//     .setName("mention")
-//     .setDescription("...")
-
-// client.on("interactionCreate", interaction => {
-//     if(interaction.isCommand()){
-//         if(interaction.commandName === "mention"){
-//             message.reply("Mention d'un utilisateur : <@" + message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">");
-//         }
-//     }
-// })
-
-// // Command ping-pong
-// var cmd_ping = new SlashCommandBuilder()
-//     .setName("ping")
-//     .setDescription("pong")
-
-// client.on("interactionCreate", interaction => {
-//     if(interaction.isCommand()){
-//         if(interaction.commandName === "ping"){
-//             message.channel.send("pong");
-//         }
-//     }
-// })
+client.on("messageCreate", (message) => {
+    // Exit and stop if it's not there
+    if (!message.content.startsWith(prefix)) return;
+  
+    // Command ping-pong
+    if (message.content.startsWith(`${prefix}ping`)) {
+      message.channel.send("pong!");
+    } 
+    else if (message.content.startsWith(`${prefix}mention`)) {
+        message.reply("Mention d'un utilisateur : <@" + message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">");
+    }
+    else if ((message.content.startsWith(`${prefix}list-command`)) {
+        message.reply("Les commandes du bot sont \n ..."
+            + "/ping            | Réponds 'pong' \n"
+            + "/list-command    | Liste des commandes du bot \n"
+            + "/clear           | Efface jusqu'a 100 messages \n" 
+            + "/mention         | mention");
+    }
+  });
 
 // Command Clear
 var data = new SlashCommandBuilder()
