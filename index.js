@@ -27,7 +27,7 @@ client.on("messageCreate", (message) => {
     else if (message.content.startsWith(`${prefix}mention`)) {
         message.reply("Mention d'un utilisateur : <@" + message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">");
     }
-    else if ((message.content.startsWith(`${prefix}list-command`)) {
+    else if (message.content.startsWith(`${prefix}list-command`)) {
         message.reply("Les commandes du bot sont \n ..."
             + "/ping            | Réponds 'pong' \n"
             + "/list-command    | Liste des commandes du bot \n"
