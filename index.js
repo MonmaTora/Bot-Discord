@@ -23,11 +23,11 @@ client.on("messageCreate", (message) => {
     // Command ping-pong
     if (message.content.startsWith(`${prefix}ping`)) {
         message.channel.send("pong!");
-        interaction.channel.bulkDelete(1);
+        message.channel.bulkDelete(1);
     } 
     else if (message.content.startsWith(`${prefix}mention`)) {
         message.reply("Mention d'un utilisateur : <@" + message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">");
-        interaction.channel.bulkDelete(1);
+        message.channel.bulkDelete(1);
     }
     else if (message.content.startsWith(`${prefix}list-command`)) {
         message.reply("Les commandes du bot sont \n"
@@ -35,7 +35,7 @@ client.on("messageCreate", (message) => {
             + "/list-command    | Liste des commandes du bot \n"
             + "/clear           | Efface jusqu'a 100 messages \n" 
             + "/mention         | mention");
-        interaction.channel.bulkDelete(1);
+        message.channel.bulkDelete(1);
     }
   });
 
